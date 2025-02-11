@@ -46,7 +46,7 @@ public class App {
         // Question 7 - Afficher le plus petit salaire de l'entreprise
         System.out.println(searchLowestSalary(employes));
 
-        // Question 8 et 9 - Afficher le salaire le plus bas de l'entreprise et ajouter 550€
+        // Question 8 et 9 - Afficher les employés avec le salaire le plus bar et ajouter 550€
         System.out.println(searchEmployesWithLowestSalaryAndAdd(employes));
 
         // Question 10 - Afficher les employés informaticiens
