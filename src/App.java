@@ -40,14 +40,14 @@ public class App {
         // Question 5 - Afficher la masse salariale totale
         System.out.println(getTotalSalary(employes)); 
 
-        // Question 6 - Afficher les employés les plus anciens de l'entreprise
+        // Question 6 - Afficher le ou les employés les plus anciens de l'entreprise
         System.out.println(searchOldestEmployes(employes));
 
         // Question 7 - Afficher le plus petit salaire de l'entreprise
         System.out.println(searchLowestSalary(employes));
 
         // Question 8 et 9 - Afficher le salaire le plus bas de l'entreprise et ajouter 550€
-        System.out.println(searchLowestSalary(employes));
+        System.out.println(searchEmployesWithLowestSalaryAndAdd(employes));
 
         // Question 10 - Afficher les employés informaticiens
         System.out.println(searchEmployesByJob(employes, "Informaticien"));
@@ -59,7 +59,7 @@ public class App {
         System.out.println(displayEmployesByJob(employes, "Chef de service"));
 
         // Question 14 - Afficher les employés embauchés 5 ans avant 2020 et dont le salaire est compris entre 60000 et 150000€
-        System.out.println(searchEmployesByYearAndSalary(employes, 5, 20, 60000, 150000));
+        System.out.println(searchEmployesByYearAndSalary(employes, 5, 2020, 60000, 150000));
 
     }
 
@@ -124,19 +124,46 @@ public class App {
         return result.toString();
     }
 
-    // Search the lowest salary and add 550€
+    // Search the lowest salary
     public static String searchLowestSalary(ArrayList<Employe> employes) {
         Integer lowestSalary = employes.get(0).getSalary();
-        Integer updatedSalary = 0;
         for (Employe employe : employes) {
             if (employe.getSalary() < lowestSalary) {
                 lowestSalary = employe.getSalary();
-                updatedSalary = lowestSalary + 550;
             }
         }
-        System.out.println("\n" + "Le salaire le plus bas de l'entreprise est de : " + lowestSalary + "€" + "\n");
+        return "\n" + "Le salaire le plus bas de l'entreprise est de : " + lowestSalary + "€" + "\n";
         
-        return "\n" + "Le salaire le plus bas de l'entreprise avec 550€ en plus est de : " + updatedSalary + "€" + "\n";
+    }
+
+    // Dsiplay employees with the lowest salary and add 550 at each salary
+    public static String searchEmployesWithLowestSalaryAndAdd(ArrayList<Employe> employes) {
+        ArrayList<Employe> employesWithLowestSalary = new ArrayList<>();
+        Integer lowestSalary = employes.get(0).getSalary();
+    
+        for (Employe employe : employes) {
+            if (employe.getSalary() <= lowestSalary) {
+                lowestSalary = employe.getSalary();
+            }
+        }
+    
+        for (Employe employe : employes) {
+            if(employe.getSalary() <= lowestSalary) {
+                employesWithLowestSalary.add(employe);
+            }
+        }
+
+        for (Employe employe : employesWithLowestSalary) {
+            employe.setSalary(employe.getSalary() + 550);
+        }
+    
+        StringBuilder result = new StringBuilder("\nListe des employés avec le salaire le plus bas et ajout de 550€ :\n\n");
+    
+        for (Employe employe : employesWithLowestSalary) {
+            result.append(employe.display()).append("\n");
+        }
+    
+        return result.toString();
     }
 
     // Find employes by job

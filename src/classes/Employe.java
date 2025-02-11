@@ -41,6 +41,10 @@ public class Employe {
         return salary;
     }
 
+    public Integer setSalary(Integer salary) {
+        return this.salary = salary;
+    }
+
     public String display() {
         return "Employé : Immatriculation : " + this.id + " - " + this.lastname + " " + this.firstname + " (" + this.job + ") - Salaire : " + this.salary + "€";
     }
